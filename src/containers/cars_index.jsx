@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import {fetchCars} from '../actions/index';
+import { Link } from 'react-router-dom';
 
 class CarsIndex extends Component {
+
+  componentWillMount() {
+    this.props.fetchCars(this.props.garage);
+  }
 
   render() {
     return(
@@ -16,6 +22,9 @@ class CarsIndex extends Component {
             </div>
           );
         })}
+        <Link className="btn btn-primary btn-cta" to="/cars/new">
+          Add a car
+        </Link>
       </div>
     );
   }
@@ -23,8 +32,13 @@ class CarsIndex extends Component {
 
 function mapStatetoProps (state) {
   return {
-    cars: state.cars
+    cars: state.cars,
+    garage: state.garage
   };
 }
 
-export default connect(mapStatetoProps) (CarsIndex);
+function mapDispatchtoProps (dispatch) {
+  return bindActionCreators({ fetchCars }, dispatch);
+}
+
+export default connect(mapStatetoProps, mapDispatchtoProps) (CarsIndex);
