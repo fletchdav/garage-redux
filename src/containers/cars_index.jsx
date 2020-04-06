@@ -11,6 +11,7 @@ class CarsIndex extends Component {
   }
 
   render() {
+
     return(
       <div className="cars-list">
         <h1>list of cars</h1>
@@ -19,6 +20,9 @@ class CarsIndex extends Component {
             <div className="car" key={index}>
               <h2>{car.brand} - {car.model}</h2>
               <p><b>Owner:</b> {car.owner}</p>
+              <Link className="btn btn-primary btn-cta" to={`/cars/${car.id}`}>
+                go to car
+              </Link>
             </div>
           );
         })}
